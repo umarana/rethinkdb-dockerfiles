@@ -10,21 +10,11 @@ lb-db:
     - '28015:80'
   roles:
     - global
-lb-ui:
-  image: 'tutum/haproxy:0.1'
-  environment:
-    - BACKEND_PORTS=8080
-    - MODE=http
-  links:
-    - rethinkdb
-  ports:
-    - '8080:80'
-    - '8081:1936'
-  roles:
-    - global
 rethinkdb:
   image: 'anapsix/rethinkdb:latest'
   deployment_strategy: high_availability
   restart: on-failure
+  ports:
+    - '8080:8080'
   target_num_containers: 2
 
